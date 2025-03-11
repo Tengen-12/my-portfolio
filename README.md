@@ -30,7 +30,7 @@ This portfolio highlights my professional journey, projects, and certifications.
 ## 🛠️ Tech Stack  
 This portfolio is built using:  
 - **HTML, CSS, JavaScript**  
-- **FontAwesome (for icons)**  
+- **SVG-Scalable Vector Graphics (for icons)**  
 - **GitHub Pages (for hosting)**  
 
 ---
