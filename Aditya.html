@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet" />
+  <link rel="icon" href="C:\Users\Administrator\Documents\PortFolio\anya.ico" type="image/x-icon" />
+  <style>
+    /* General Styles */
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+      color: #333;
+      transition: background 0.3s, color 0.3s;
+    }
+    .container {
+      width: 80%;
+      margin: auto;
+      padding: 20px;
+      animation: fadeIn 2s ease-in-out;
+      text-align: center; /* Ensure text is centered */
+    }
+    h1, h2 {
+      text-align: center;
+      animation: slideInFromLeft 1s ease-in-out;
+    }
+    h1:not(.no-underline), h2:not(.no-underline) {
+      display: inline-block;
+      position: relative;
+      text-align: center;
+    }
+    h1:not(.no-underline)::after, h2:not(.no-underline)::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -5px;
+      width: 100%;
+      height: 3px;
+      background-color: red;
+      font-weight: bold;
+      text-align: center;
+    }
+    /* Hero Section */
+    #hero {
+      position: relative;
+      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+      color: white;
+      padding: 100px 0;
+      text-align: center;
+      animation: zoomIn 1.5s ease-in-out;
+    }
+    /* Dark Mode Toggle Button in Hero */
+    #theme-toggle {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: white;
+      animation: rotateIn 1s ease-in-out;
+    }
+    .btn {
+      display: inline-block;
+      padding: 10px 20px;
+      background: #ff6600;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      transition: background 0.3s;
+      animation: bounceIn 1s ease-in-out;
+    }
+    .btn:hover {
+      background: #cc5500;
+    }
+    /* Sections */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      animation: fadeInUp 1s ease-in-out;
+    }
+    .card {
+      background: white;
+      padding: 20px;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      transition: transform 0.3s;
+      cursor: pointer;
+      animation: flipInX 1s ease-in-out;
+    }
+    .card:hover {
+      transform: scale(1.05);
+    }
+    /* Overlay */
+    .overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      justify-content: center;
+      align-items: center;
+      color: white;
+      animation: fadeIn 0.5s ease-in-out;
+    }
+    .overlay-content {
+      background: white;
+      color: black;
+      padding: 20px;
+      border-radius: 8px;
+      text-align: center;
+      max-width: 500px;
+      animation: slideInFromBottom 0.5s ease-in-out;
+    }
+    .overlay.active {
+      display: flex;
+    }
+    .overlay-content .btn-visit {
+      display: inline-block;
+      padding: 10px 20px;
+      background: #ff6600;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      margin-top: 10px;
+      transition: background 0.3s;
+    }
+    .overlay-content .btn-visit:hover {
+      background: #cc5500;
+    }
+    /* Footer */
+    footer {
+      text-align: left;
+      padding: 20px;
+      background: #333;
+      color: white;
+      animation: slideUp 1s ease-in-out;
+    }
+    /* Dark Mode Styles */
+    .dark-mode {
+      background-color: #1e1e1e;
+      color: #ddd;
+    }
+    .dark-mode .btn {
+      background: #ff6600;
+      color: white;
+    }
+    .dark-mode .card {
+      background-color: #333;
+      color: #ddd;
+    }
+    .dark-mode footer {
+      background: #222;
+    }
+    /* Experience & Certifications Sections */
+    #experience, #certifications {
+      padding: 50px 0;
+    }
+    /* Keyframes for Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes slideInFromLeft {
+      from { transform: translateX(-100%); }
+      to { transform: translateX(0); }
+    }
+    @keyframes slideDown {
+      from { transform: translateY(-100%); }
+      to { transform: translateY(0); }
+    }
+    @keyframes rotateIn {
+      from { transform: rotate(-360deg); }
+      to { transform: rotate(0); }
+    }
+    @keyframes zoomIn {
+      from { transform: scale(0); }
+      to { transform: scale(1); }
+    }
+    @keyframes bounceIn {
+      from { transform: scale(0.5); }
+      to { transform: scale(1); }
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes flipInX {
+      from { transform: perspective(400px) rotateX(90deg); }
+      to { transform: perspective(400px) rotateX(0); }
+    }
+    @keyframes slideInFromBottom {
+      from { transform: translateY(100%); }
+      to { transform: translateY(0); }
+    }
+    @keyframes slideUp {
+      from { transform: translateY(100%); }
+      to { transform: translateY(0); }
+    }
+    #hero canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
+    #hero .container {
+      position: relative;
+      z-index: 1;
+    }
+    /* Social Media Icons in Footer */
+    .footer-social-icons {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .footer-social-icons a {
+      color: white;
+      font-size: 1.5rem;
+      transition: color 0.3s;
+    }
+    .footer-social-icons a:hover {
+      color: #ff6600;
+    }
+    .footer-social-icons svg {
+      width: 24px;
+      height: 24px;
+      fill: white;
+      transition: fill 0.3s;
+    }
+    .footer-social-icons a:hover svg {
+      fill: #ff6600;
+    }
+    #footer-canvas {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 100px;
+      z-index: 0;
+    }
+    footer .container {
+      position: relative;
+      z-index: 1;
+    }
+  </style>
+</head>
+<body>
+  <section id="hero">
+    <canvas id="binaryCanvas"></canvas>
+    <button id="theme-toggle">🌙</button>
+    <div class="container">
+      <h2 class="no-underline">Hi, I'm a Security Analyst & Penetration Tester</h2>
+      <p>Passionate about ethical hacking, web security, and system protection.</p>
+      <a href="https://github.com/Tengen-12?tab=repositories" class="btn">View Projects</a>
+    </div>
+  </section>
+  <section id="about" class="container">
+    <h2>About Me</h2>
+    <p>I’m a dedicated Cybersecurity Analyst and Penetration Tester with a strong foundation in networking, hardware, Windows Server administration, and Linux systems.
+       I have a basic knowledge of Python, SQL, and Bash scripting, and I'm always learning more.
+       I thrive on the challenge of identifying vulnerabilities and strengthening defenses, making sure systems remain resilient against evolving threats.<br>
+       Outside of my professional life, I’m an avid cricket enthusiast and a passionate manga reader.
+       These hobbies keep my mind agile and creative, complementing my analytical and problem-solving skills in cybersecurity.</p>
+  </section>
+  <section id="Internship/Experience" class="container">
+    <h2>Internship/Experience</h2>
+    <div class="grid">
+      <div class="card" onclick="openOverlay('Penetration Tester', 'Jetking Pvt. Ltd., Dec 1 2023- Jan 1 2024<br>Responsible for overseeing the security of the company\'s network and systems.', 'https://www.linkedin.com/in/aditya-barokar-104178358/')">
+        <h3>Penetration Tester</h3>
+        <p>Jetking Pvt. Ltd., Dec 1 2023- Jan 1 2024</p>
+        <p>Responsible for overseeing the security of the company's network and systems.</p>
+      </div>
+      <div class="card" onclick="openOverlay('Jr. Penetration Tester', 'Figment Global Solutions Pvt. Ltd., Dec 16 2024 - Jun 15 2025<br>Worked on developing secure web applications and tools.', 'https://www.linkedin.com/in/aditya-barokar-104178358/')">
+        <h3>Penetration Tester</h3>
+        <p>Figment Global Solutions Pvt. Ltd., Dec 16 2024 - Jun 15 2025</p>
+        <p>Worked on developing secure web applications and tools.</p> 
+      </div>
+    </div>
+  </section>
+  <section id="certifications" class="container">
+    <h2>Certifications</h2>
+    <div class="grid">
+      <div class="card" onclick="openOverlay('Networking Basics', 'CISCO, Nov 2024<br>Basic networking concepts, IP addressing and subnetting, Configuring Cisco routers & switches', 'https://www.linkedin.com/in/aditya-barokar-104178358/')">
+        <h3>Networking Basics</h3>
+        <p>CISCO, Nov 2024</p>
+        <p>Basic networking concepts, IP addressing and subnetting, Configuring Cisco routers & switches<p>
+      </div>
+      <div class="card" onclick="openOverlay('Cyber Security Analyst(TATA)', 'Forage, Nov 2024<br>Act like a Cyber Security Analyst at TATA, where your main job is to monitor systems, spot any unusual activities, and suggest improvements.', 'https://www.linkedin.com/in/aditya-barokar-104178358/')">
+        <h3>Cyber Security Analyst(TATA)</h3>
+        <p>Forage, Nov 2024</p>
+        <p>Act like a Cyber Security Analyst at TATA, where your main job is to monitor systems, spot any unusual activities, and suggest improvements.</p>
+      </div>
+    </div>
+  </section>
+  <section id="projects" class="container">
+    <h2>Projects</h2>
+    <div class="grid">
+      <div class="card" onclick="openOverlay('Ethigotchi', 'A wireless security AI similar to Pwnagotchi.', 'https://github.com/Tengen-12/Wifu')">
+        <h3>Ethigotchi</h3>
+        <p>A wireless security AI similar to Pwnagotchi.</p>
+      </div>
+      <div class="card" onclick="openOverlay('ScrapeMEE', 'A governance, risk, and compliance dashboard.', 'https://github.com/Tengen-12/Scraping-Tool')">
+        <h3>ScrapeMEE</h3>
+        <p>This tool is to designed to scrape through the website ethically. It gives Html contents, links, and images.</p>
+      </div>
+    </div>
+  </section>
+  <footer>
+    <canvas id="footer-canvas"></canvas>
+    <canvas id="footerCanvas"></canvas>
+    <div class="container">
+      <p>Contact Me 👇<br>👉 Email: barokar.aditya1807@gmail.com ||<br>👉 Phone: +91-9579208146 ||</p>
+      <p>&copy; 2025 My Portfolio. All rights reserved.</p>
+      <div class="footer-social-icons">
+        <a href="https://github.com/Tengen-12/" target="_blank" title="GitHub" rel="noopener">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.11.82-.26.82-.577v-2.165c-3.338.726-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.757-1.333-1.757-1.09-.745.083-.73.083-.73 1.205.085 1.84 1.237 1.84 1.237 1.07 1.835 2.807 1.305 3.492.997.108-.774.42-1.305.763-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.467-2.38 1.235-3.22-.123-.303-.535-1.523.117-3.176 0 0 1.008-.322 3.3 1.23.957-.266 1.98-.398 3-.403 1.02.005 2.043.137 3 .403 2.29-1.552 3.297-1.23 3.297-1.23.653 1.653.24 2.873.118 3.176.77.84 1.233 1.91 1.233 3.22 0 4.61-2.803 5.625-5.475 5.92.43.37.823 1.102.823 2.222v3.293c0 .32.218.694.825.577C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12z"/>
+          </svg>
+        </a>
+        <a href="https://www.linkedin.com/in/aditya-barokar-104178358/" target="_blank" title="LinkedIn" rel="noopener">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M22.23 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.46c.98 0 1.77-.77 1.77-1.72V1.72C24 .77 23.21 0 22.23 0zM7.12 20.45H3.56V9h3.56v11.45zM5.34 7.58c-1.14 0-2.06-.93-2.06-2.08 0-1.15.92-2.08 2.06-2.08 1.14 0 2.06.93 2.06 2.08 0 1.15-.92 2.08-2.06 2.08zM20.45 20.45h-3.56v-5.6c0-1.34-.03-3.06-1.86-3.06-1.86 0-2.15 1.45-2.15 2.95v5.71h-3.56V9h3.42v1.56h.05c.48-.91 1.65-1.86 3.4-1.86 3.63 0 4.3 2.39 4.3 5.5v6.25z"/>
+          </svg>
+        </a>
+        <a href="https://www.instagram.com/adi_._b?igsh=bDVzMHYwY2F5OWFm" target="_blank" title="Instagram" rel="noopener">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.366.062 2.633.334 3.608 1.31.975.975 1.248 2.242 1.31 3.608.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.062 1.366-.334 2.633-1.31 3.608-.975.975-2.242 1.248-3.608 1.31-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.366-.062-2.633-.334-3.608-1.31-.975-.975-1.248-2.242-1.31-3.608-.058-1.266-.07-1.646-.07-4.85s.012-3.584.07-4.85c.062-1.366.334-2.633 1.31-3.608.975-.975 2.242-1.248 3.608-1.31 1.266-.058 1.646-.07 4.85-.07zm0-2.163c-3.259 0-3.667.014-4.947.072-1.281.059-2.418.27-3.29 1.142-.872.872-1.083 2.009-1.142 3.29-.058 1.28-.072 1.688-.072 4.947s.014 3.667.072 4.947c.059 1.281.27 2.418 1.142 3.29.872.872 2.009 1.083 3.29 1.142 1.28.058 1.688.072 4.947.072s3.667-.014 4.947-.072c1.281-.059 2.418-.27 3.29-1.142.872-.872 1.083-2.009 1.142-3.29.058-1.28.072-1.688.072-4.947s-.014-3.667-.072-4.947c-.059-1.281-.27-2.418-1.142-3.29-.872-.872-2.009-1.083-3.29-1.142-1.28-.058-1.688-.072-4.947-.072zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162-2.759-6.162-6.162-6.162zm0 10.162c-2.207 0-4-1.793-4-4s1.793-4 4-4 4 1.793 4 4-1.793 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.441s.645 1.441 1.441 1.441 1.441-.645 1.441-1.441-.645-1.441-1.441-1.441z"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+  <div class="overlay" id="overlay" onclick="closeOverlay()">
+    <div class="overlay-content">
+      <h2 id="overlay-title"></h2>
+      <p id="overlay-desc"></p>
+      <a id="overlay-link" class="btn-visit" href="#" target="_blank">Visit</a>
+    </div>
+  </div>
+  <script>
+    // Check for saved theme on page load
+    document.addEventListener('DOMContentLoaded', function() {
+      if (localStorage.getItem('theme') === 'dark') {
+        document.body.classList.add('dark-mode');
+        document.getElementById('theme-toggle').textContent = '☀️';
+      }
+      startBinaryAnimation();
+      startFooterBinaryAnimation(); // Add binary animation to the footer
+      // Remove the molecule animation call
+    });
+
+    function openOverlay(title, desc, link) {
+      document.getElementById('overlay-title').textContent = title;
+      document.getElementById('overlay-desc').innerHTML = desc;
+      document.getElementById('overlay-link').href = link;
+      document.getElementById('overlay').classList.add('active');
+    }
+
+    function closeOverlay() {
+      document.getElementById('overlay').classList.remove('active');
+    }
+
+    document.getElementById('theme-toggle').addEventListener('click', function() {
+      document.body.classList.toggle('dark-mode');
+      const isDarkMode = document.body.classList.contains('dark-mode');
+      this.textContent = isDarkMode ? '☀️' : '🌙';
+      // Save the theme preference to localStorage
+      localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+    });
+
+    function startBinaryAnimation() {
+      const canvas = document.getElementById('binaryCanvas');
+      const ctx = canvas.getContext('2d');
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      const binary = '01';
+      const fontSize = 16;
+      const columns = canvas.width / fontSize;
+      const drops = Array(Math.floor(columns)).fill(1);
+
+      function draw() {
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = '#0f0';
+        ctx.font = `${fontSize}px monospace`;
+
+        for (let i = 0; i < drops.length; i++) {
+          const text = binary[Math.floor(Math.random() * binary.length)];
+          ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+          if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+            drops[i] = 0;
+          }
+          drops[i]++;
+        }
+      }
+
+      setInterval(draw, 33);
+    }
+  </script>
+</body>
+</html>
