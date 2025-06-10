@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>My Portfolio</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet" />
-  <link rel="icon" href="C:\Users\Administrator\Documents\PortFolio\anya.ico" type="image/x-icon" />
   <style>
     /* General Styles */
     body {
@@ -85,13 +84,15 @@
       animation: fadeInUp 1s ease-in-out;
     }
     .card {
-      background: white;
+      background: #fff7f2;
       padding: 20px;
       box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
       border-radius: 8px;
       transition: transform 0.3s;
       cursor: pointer;
       animation: flipInX 1s ease-in-out;
+      border-left: 6px solid #ff6600;
+      border-right: 6px solid #ff6600;
     }
     .card:hover {
       transform: scale(1.05);
@@ -109,6 +110,8 @@
       align-items: center;
       color: white;
       animation: fadeIn 0.5s ease-in-out;
+      z-index: 1000;
+      backdrop-filter: blur(2px);
     }
     .overlay-content {
       background: white;
@@ -163,6 +166,91 @@
     #experience, #certifications {
       padding: 50px 0;
     }
+    /* Responsive TryHackMe Overlay */
+    .thm-overlay-content {
+      background: linear-gradient(135deg, #232526 0%, #414345 100%);
+      color: #fff;
+      border-radius: 18px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+      padding: 36px 28px 32px 28px;
+      max-width: 420px;
+      width: 96vw;
+      text-align: center;
+      position: relative;
+      border: 2.5px solid #ff6600;
+      animation: popIn 0.6s cubic-bezier(.68,-0.55,.27,1.55);
+    }
+    .thm-badge-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+    }
+    #thm-badge-iframe {
+      width: 100%;
+      min-width: 250px;
+      max-width: 380px;
+      min-height: 150px;
+      height: 180px;
+      box-sizing: border-box;
+      background: transparent;
+      border: none;
+      display: block;
+    }
+    @media (max-width: 500px) {
+      .thm-overlay-content {
+        width: 98vw;
+        max-width: 98vw;
+        padding: 20px 2vw 20px 2vw;
+      }
+      #thm-badge-iframe {
+        min-width: 0;
+        width: 98vw;
+        max-width: 98vw;
+      }
+    }
+    /* Profile Picture Top Left */
+    .profile-pic-container {
+      position: fixed;
+      top: 28px;
+      left: 30px;
+      z-index: 1001;
+        width: 82px;
+      height: 82px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255,255,255,0.85);
+      border-radius: 50%;
+      box-shadow: 0 2px 14px rgba(0,0,0,0.13);
+      border: 3px solid #ff6600;
+      overflow: hidden;
+      transition: box-shadow 0.2s, border-color 0.2s, transform 0.25s;
+    }
+    .profile-pic-container:hover {
+      box-shadow: 0 4px 24px rgba(255,102,0,0.18);
+      border-color: #cc5500;
+      transform: scale(1.13);
+    }
+    .profile-pic-container img {
+      width: 76px;
+      height: 76px;
+      object-fit: cover;
+      border-radius: 50%;
+      display: block;
+    }
+    @media (max-width: 700px) {
+      .profile-pic-container {
+        top: 10px;
+        left: 10px;
+        width: 58px;
+        height: 58px;
+      }
+      .profile-pic-container img {
+        width: 52px;
+        height: 52px;
+      }
+    }
     /* Keyframes for Animations */
     @keyframes fadeIn {
       from { opacity: 0; }
@@ -216,45 +304,320 @@
       position: relative;
       z-index: 1;
     }
-    /* Social Media Icons in Footer */
+    /* Enhanced Contact Section */
+    .contact-container {
+      display: flex;
+      flex-direction: row;
+      gap: 30px;
+      margin-bottom: 20px;
+      justify-content: flex-start;
+      flex-wrap: wrap;
+    }
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.10);
+      padding: 16px 24px;
+      font-size: 1.08rem;
+      color: #333;
+      min-width: 240px;
+      margin-bottom: 10px;
+      transition: box-shadow 0.3s, transform 0.3s;
+      border: 1.5px solid #f2f2f2;
+      font-weight: 500;
+    }
+    .contact-item:hover {
+      box-shadow: 0 6px 18px rgba(255,102,0,0.13);
+      transform: translateY(-3px) scale(1.03);
+      border-color: #ff6600;
+      background: #fff7f2;
+    }
+    .contact-item svg {
+      width: 22px;
+      height: 22px;
+      fill: #ff6600;
+      flex-shrink: 0;
+    }
+    /* Social icons vertical, slightly smaller but still visible */
     .footer-social-icons {
       display: flex;
-      justify-content: flex-end;
-      gap: 10px;
-      margin-top: 10px;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 16px;
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      z-index: 100;
+      background: rgba(34,34,34,0.92);
+      border-radius: 28px;
+      padding: 14px 10px;
+      box-shadow: 0 2px 14px rgba(0,0,0,0.18);
+      border-left: 6px solid #ff6600;
+      border-right: 6px solid #ff6600;
     }
     .footer-social-icons a {
       color: white;
-      font-size: 1.5rem;
-      transition: color 0.3s;
+      font-size: 1.2rem;
+      transition: color 0.3s, transform 0.2s, background 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      padding: 2px;
     }
     .footer-social-icons a:hover {
       color: #ff6600;
+      background: rgba(255,102,0,0.13);
+      transform: scale(1.08) rotate(-6deg);
     }
     .footer-social-icons svg {
-      width: 24px;
-      height: 24px;
+      width: 22px;
+      height: 22px;
       fill: white;
       transition: fill 0.3s;
+      display: block;
     }
     .footer-social-icons a:hover svg {
       fill: #ff6600;
     }
-    #footer-canvas {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 100px;
-      z-index: 0;
+    /* About Section Styling */
+    #about {
+      background: #fff7f2;
+      border-radius: 14px;
+      box-shadow: 0 2px 12px rgba(255,102,0,0.06);
+      margin-top: 40px;
+      margin-bottom: 40px;
+      padding: 40px 30px 30px 30px;
+      max-width: 900px;
+      text-align: justify;
+      line-height: 1.8;
+      font-size: 1.13rem;
+      color: #222;
+      border-left: 6px solid #ff6600;
+      border-right: 6px solid #ff6600;
+      transition: background 0.3s, color 0.3s;
     }
-    footer .container {
+    #about h2 {
+      color: #ff6600;
+      margin-bottom: 18px;
+      text-align: center;
+      letter-spacing: 0.02em;
+    }
+    .dark-mode #about {
+      background: #232323;
+      color: #ddd;
+      border-left: 6px solid #ff6600;
+      border-right: 6px solid #ff6600;
+    }
+    /* TryHackMe Overlay Enhancement */
+    #thm-overlay {
+      background: rgba(15, 32, 39, 0.92);
+      backdrop-filter: blur(3px);
+      z-index: 2000;
+    }
+    .thm-overlay-content {
+      background: linear-gradient(135deg, #232526 0%, #414345 100%);
+      color: #fff;
+      border-radius: 18px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+      padding: 36px 28px 32px 28px;
+      max-width: 420px;
+      width: 96vw;
+      text-align: center;
       position: relative;
-      z-index: 1;
+      border: 2.5px solid #ff6600;
+      animation: popIn 0.6s cubic-bezier(.68,-0.55,.27,1.55);
     }
+    .thm-overlay-content h2 {
+      color: #ff6600;
+      margin-bottom: 18px;
+      font-size: 2rem;
+      letter-spacing: 0.01em;
+      font-weight: 700;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    }
+    /* Overlay Enhancement for All Overlays */
+    #overlay {
+      background: rgba(15, 32, 39, 0.92);
+      backdrop-filter: blur(3px);
+      z-index: 2000;
+    }
+    .overlay-content {
+      background: linear-gradient(135deg, #232526 0%, #414345 100%);
+      color: #fff;
+      border-radius: 18px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+      padding: 36px 28px 32px 28px;
+      max-width: 420px;
+      width: 96vw;
+      text-align: center;
+      position: relative;
+      border: 2.5px solid #ff6600;
+      animation: popIn 0.6s cubic-bezier(.68,-0.55,.27,1.55);
+    }
+    .overlay-content h2 {
+      color: #ff6600;
+      margin-bottom: 18px;
+      font-size: 2rem;
+      letter-spacing: 0.01em;
+      font-weight: 700;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    }
+    .overlay-content .btn-visit {
+      display: inline-block;
+      padding: 10px 20px;
+      background: #ff6600;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      margin-top: 18px;
+      transition: background 0.3s;
+      font-weight: 600;
+      font-size: 1.08rem;
+      box-shadow: 0 2px 8px rgba(255,102,0,0.10);
+    }
+    .overlay-content .btn-visit:hover {
+      background: #cc5500;
+    }
+    .overlay-content .close-btn,
+    .overlay-content .close-btn-custom {
+      background: #ff6600;
+      color: #fff;
+      border-radius: 50%;
+      border: none;
+      font-size: 2.2rem;
+      width: 44px;
+      height: 44px;
+      position: absolute;
+      top: -22px;
+      right: -22px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.18);
+      cursor: pointer;
+      z-index: 10;
+      transition: background 0.2s, color 0.2s, transform 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .overlay-content .close-btn:hover,
+    .overlay-content .close-btn-custom:hover {
+      background: #cc5500;
+      color: #fff;
+      transform: scale(1.08);
+    }
+    @media (max-width: 600px) {
+      .overlay-content,
+      .thm-overlay-content {
+        padding: 18px 4vw 18px 4vw;
+        max-width: 99vw;
+      }
+      .overlay-content .close-btn,
+      .overlay-content .close-btn-custom,
+      .thm-overlay-content .close-btn {
+        top: -10px;
+        right: -10px;
+        width: 36px;
+        height: 36px;
+        font-size: 1.5rem;
+      }
+    }
+    @media (max-width: 900px) {
+      .container {
+        width: 96%;
+        padding: 12px;
+      }
+      .grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+      .card {
+        padding: 16px 10px;
+        font-size: 1rem;
+      }
+      #about {
+        padding: 28px 10px 20px 10px;
+        max-width: 98vw;
+      }
+    }
+    @media (max-width: 700px) {
+      .container {
+        width: 99%;
+        padding: 6px;
+      }
+      .profile-pic-container {
+        top: 8px;
+        left: 8px;
+        width: 48px;
+        height: 48px;
+      }
+      .profile-pic-container img {
+        width: 42px;
+        height: 42px;
+      }
+      .footer-social-icons {
+        bottom: 10px;
+        right: 10px;
+        padding: 8px 6px;
+        border-radius: 18px;
+      }
+      .card {
+        font-size: 0.98rem;
+        padding: 12px 4px;
+      }
+      #about {
+        padding: 18px 4px 12px 4px;
+        font-size: 1rem;
+      }
+    }
+    @media (max-width: 500px) {
+      .container {
+        width: 100vw;
+        padding: 2vw;
+      }
+      .grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+      .card {
+        font-size: 0.95rem;
+        padding: 8px 2px;
+        border-radius: 7px;
+      }
+      #about {
+        padding: 10px 2vw 8px 2vw;
+        font-size: 0.97rem;
+        border-radius: 8px;
+      }
+      .footer-social-icons {
+        bottom: 2vw;
+        right: 2vw;
+        padding: 4px 2px;
+        border-radius: 12px;
+      }
+      .profile-pic-container {
+        width: 36px;
+        height: 36px;
+        top: 4px;
+        left: 4px;
+      }
+      .profile-pic-container img {
+        width: 30px;
+        height: 30px;
+      }
+      h1, h2 {
+        font-size: 1.2rem;
+      }
+    }
+    /* ...existing code... */
   </style>
 </head>
 <body>
+  <div class="profile-pic-container">
+    <img src="photu.jpg" alt="Profile Picture" />
+  </div>
   <section id="hero">
     <canvas id="binaryCanvas"></canvas>
     <button id="theme-toggle">🌙</button>
@@ -266,38 +629,57 @@
   </section>
   <section id="about" class="container">
     <h2>About Me</h2>
-    <p>I’m a dedicated Cybersecurity Analyst and Penetration Tester with a strong foundation in networking, hardware, Windows Server administration, and Linux systems.
-       I have a basic knowledge of Python, SQL, and Bash scripting, and I'm always learning more.
-       I thrive on the challenge of identifying vulnerabilities and strengthening defenses, making sure systems remain resilient against evolving threats.<br>
-       Outside of my professional life, I’m an avid cricket enthusiast and a passionate manga reader.
-       These hobbies keep my mind agile and creative, complementing my analytical and problem-solving skills in cybersecurity.</p>
+    <p style="text-align:justify;">
+      I’m a dedicated <b>Cybersecurity Analyst</b> and <b>Penetration Tester</b> with a strong foundation in networking, hardware, Windows Server administration, and Linux systems.
+      I have a basic knowledge of Python, SQL, and Bash scripting, and I'm always learning more.
+      I thrive on the challenge of identifying vulnerabilities and strengthening defenses, making sure systems remain resilient against evolving threats.<br>
+      Outside of my professional life, I’m an avid cricket enthusiast and a passionate manga reader.
+      These hobbies keep my mind agile and creative, complementing my analytical and problem-solving skills in cybersecurity.
+    </p>
+    <button class="btn" id="show-thm-btn" style="margin-top:20px;">View my TryHackMe Stats</button>
   </section>
+  <!-- TryHackMe Badge Overlay -->
+  <div class="overlay" id="thm-overlay" onclick="closeThmOverlay(event)">
+    <div class="overlay-content thm-overlay-content" onclick="event.stopPropagation()">
+      <button class="close-btn" onclick="closeThmOverlay(event)" aria-label="Close">&times;</button>
+      <h2>TryHackMe Stats</h2>
+      <div class="thm-desc">
+        <span>My latest TryHackMe progress and achievements.<br>Click the badge for more details!</span>
+      </div>
+      <div class="thm-badge-wrapper">
+        <a href="https://tryhackme.com/p/AdityaBarokar" target="_blank" rel="noopener" style="display:block;">
+          <iframe src="https://tryhackme.com/api/v2/badges/public-profile?userPublicId=1607293"
+            style="border:none;" id="thm-badge-iframe" title="TryHackMe Badge"></iframe>
+        </a>
+      </div>
+    </div>
+  </div>
   <section id="Internship/Experience" class="container">
     <h2>Internship/Experience</h2>
     <div class="grid">
-      <div class="card" onclick="openOverlay('Penetration Tester', 'Jetking Pvt. Ltd., Dec 1 2023- Jan 1 2024<br>Responsible for overseeing the security of the company\'s network and systems.', 'https://www.linkedin.com/in/aditya-barokar-104178358/')">
-        <h3>Penetration Tester</h3>
-        <p>Jetking Pvt. Ltd., Dec 1 2023- Jan 1 2024</p>
-        <p>Responsible for overseeing the security of the company's network and systems.</p>
+      <div class="card" onclick="openOverlay('Application Security Engineer', '<b>Figment Global Solutions Pvt. Ltd., Dec 16 2024- May 31 2025</b><br><br>Worked on developing secure web applications and tools.<br>Oversaw and improved the security posture of web applications hosted by the company. <br>Developed and integrated a secure authentication module using salted password hashes and Redis session management. <br>Designed an auto session termination system to enhance account protection and prevent session hijacking. <br>Helped build a mini SIEM-like dashboard that logs and visualizes access and security events. <br>Documented every task and maintained an internship diary covering weekly achievements, targets, and planning.')">
+        <h3>Application Security Engineer</h3>
+        <p><b>Figment Global Solutions Pvt. Ltd., Dec 16 2024- May 31 2025</b></p>
+        <p>Worked on developing secure web applications and tools.</p>
       </div>
-      <div class="card" onclick="openOverlay('Jr. Penetration Tester', 'Figment Global Solutions Pvt. Ltd., Dec 16 2024 - Jun 15 2025<br>Worked on developing secure web applications and tools.', 'https://www.linkedin.com/in/aditya-barokar-104178358/')">
-        <h3>Penetration Tester</h3>
-        <p>Figment Global Solutions Pvt. Ltd., Dec 16 2024 - Jun 15 2025</p>
-        <p>Worked on developing secure web applications and tools.</p> 
+      <div class="card" onclick="openOverlay('Jr. Penetration Tester', '<b>Jetking Pvt. Ltd., Dec 01 2023- Feb 01 2024</b><br><br>Responsible for overseeing the security of the company\'s network and systems. Conducted penetration testing on test environments using tools like Burp Suite, Nmap, and Nikto. <br>Worked with senior security professionals to understand OWASP Top 10 vulnerabilities in real-world scenarios. <br>Gained hands-on experience with Kali Linux and standard pentesting distributions.')">
+        <h3>Jr. Penetration Tester</h3>
+        <p><b>Jetking Pvt. Ltd., Dec 01 2023- Feb 01 2024</b></p>
+        <p>Responsible for overseeing the security of the company's network and systems.</p>
       </div>
     </div>
   </section>
   <section id="certifications" class="container">
     <h2>Certifications</h2>
     <div class="grid">
-      <div class="card" onclick="openOverlay('Networking Basics', 'CISCO, Nov 2024<br>Basic networking concepts, IP addressing and subnetting, Configuring Cisco routers & switches', 'https://www.linkedin.com/in/aditya-barokar-104178358/')">
+      <div class="card" onclick="openOverlay('Networking Basics', 'CISCO, Nov 2024<br>Basic networking concepts, IP addressing and subnetting, Configuring Cisco routers & switches')">
         <h3>Networking Basics</h3>
-        <p>CISCO, Nov 2024</p>
-        <p>Basic networking concepts, IP addressing and subnetting, Configuring Cisco routers & switches<p>
+        <p><b>CISCO, Nov 2024</b></p>
+        <p>Basic networking concepts, IP addressing and subnetting, Configuring Cisco routers & switches</p>
       </div>
-      <div class="card" onclick="openOverlay('Cyber Security Analyst(TATA)', 'Forage, Nov 2024<br>Act like a Cyber Security Analyst at TATA, where your main job is to monitor systems, spot any unusual activities, and suggest improvements.', 'https://www.linkedin.com/in/aditya-barokar-104178358/')">
+      <div class="card" onclick="openOverlay('Cyber Security Analyst(TATA)', 'Forage, Nov 2024<br>Act like a Cyber Security Analyst at TATA, where your main job is to monitor systems, spot any unusual activities, and suggest improvements.')">
         <h3>Cyber Security Analyst(TATA)</h3>
-        <p>Forage, Nov 2024</p>
+        <p><b>Forage, Nov 2024</b></p>
         <p>Act like a Cyber Security Analyst at TATA, where your main job is to monitor systems, spot any unusual activities, and suggest improvements.</p>
       </div>
     </div>
@@ -309,7 +691,7 @@
         <h3>Ethigotchi</h3>
         <p>A wireless security AI similar to Pwnagotchi.</p>
       </div>
-      <div class="card" onclick="openOverlay('ScrapeMEE', 'A governance, risk, and compliance dashboard.', 'https://github.com/Tengen-12/Scraping-Tool')">
+      <div class="card" onclick="openOverlay('ScrapeMEE', 'This tool is designed to scrape through websites ethically. It provides HTML content, links, and images.', 'https://github.com/Tengen-12/Scraping-Tool')">
         <h3>ScrapeMEE</h3>
         <p>This tool is to designed to scrape through the website ethically. It gives Html contents, links, and images.</p>
       </div>
@@ -318,18 +700,43 @@
   <footer>
     <canvas id="footer-canvas"></canvas>
     <canvas id="footerCanvas"></canvas>
-    <div class="container">
-      <p>Contact Me 👇<br>👉 Email: barokar.aditya1807@gmail.com ||<br>👉 Phone: +91-9579208146 ||</p>
-      <p>&copy; 2025 My Portfolio. All rights reserved.</p>
-      <div class="footer-social-icons">
+    <div class="container" style="padding: 20px 0; max-width: 700px;">
+      <div style="margin-bottom: 20px;">
+        <div style="
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          color: #ff6600;
+          font-size: 1.3rem;
+          font-weight: 600;
+          margin-bottom: 16px;
+          justify-content: flex-start;
+        ">
+          <svg width="22" height="22" fill="#ff6600" viewBox="0 0 24 24" style="vertical-align:middle;">
+            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+          </svg>
+          Contact Me
+        </div>
+        <div class="contact-container">
+          <div class="contact-item">
+            <svg width="18" height="18" fill="#ff6600" viewBox="0 0 24 24">
+              <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 2v.01L12 13 4 6.01V6h16zM4 20v-9.99l7.99 7.99c.39.39 1.02.39 1.41 0L20 10.01V20H4z"/>
+            </svg>
+            <a href="mailto:barokar.aditya1807@gmail.com">barokar.aditya1807@gmail.com</a>
+          </div>
+          <div class="contact-item">
+            <svg width="18" height="18" fill="#ff6600" viewBox="0 0 24 24">
+              <path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1V20a1 1 0 01-1 1C10.07 21 3 13.93 3 5a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.46.57 3.58a1 1 0 01-.24 1.01l-2.2 2.2z"/>
+            </svg>
+            <span>+91-9579208146</span>
+          </div>
+        </div>
+      </div>
+      <p style="margin: 8px 0 0 0; font-size: 0.95rem;">&copy; 2025 My Portfolio. All rights reserved.</p>
+      <div class="footer-social-icons" style="position: fixed; bottom: 30px; right: 30px; z-index: 10; background: rgba(34,34,34,0.85); border-radius: 30px; padding: 10px 18px; box-shadow: 0 2px 12px rgba(0,0,0,0.18);">
         <a href="https://github.com/Tengen-12/" target="_blank" title="GitHub" rel="noopener">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
             <path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.11.82-.26.82-.577v-2.165c-3.338.726-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.757-1.333-1.757-1.09-.745.083-.73.083-.73 1.205.085 1.84 1.237 1.84 1.237 1.07 1.835 2.807 1.305 3.492.997.108-.774.42-1.305.763-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.467-2.38 1.235-3.22-.123-.303-.535-1.523.117-3.176 0 0 1.008-.322 3.3 1.23.957-.266 1.98-.398 3-.403 1.02.005 2.043.137 3 .403 2.29-1.552 3.297-1.23 3.297-1.23.653 1.653.24 2.873.118 3.176.77.84 1.233 1.91 1.233 3.22 0 4.61-2.803 5.625-5.475 5.92.43.37.823 1.102.823 2.222v3.293c0 .32.218.694.825.577C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12z"/>
-          </svg>
-        </a>
-        <a href="https://www.linkedin.com/in/aditya-barokar-104178358/" target="_blank" title="LinkedIn" rel="noopener">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-            <path d="M22.23 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.46c.98 0 1.77-.77 1.77-1.72V1.72C24 .77 23.21 0 22.23 0zM7.12 20.45H3.56V9h3.56v11.45zM5.34 7.58c-1.14 0-2.06-.93-2.06-2.08 0-1.15.92-2.08 2.06-2.08 1.14 0 2.06.93 2.06 2.08 0 1.15-.92 2.08-2.06 2.08zM20.45 20.45h-3.56v-5.6c0-1.34-.03-3.06-1.86-3.06-1.86 0-2.15 1.45-2.15 2.95v5.71h-3.56V9h3.42v1.56h.05c.48-.91 1.65-1.86 3.4-1.86 3.63 0 4.3 2.39 4.3 5.5v6.25z"/>
           </svg>
         </a>
         <a href="https://www.instagram.com/adi_._b?igsh=bDVzMHYwY2F5OWFm" target="_blank" title="Instagram" rel="noopener">
@@ -337,14 +744,20 @@
             <path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.366.062 2.633.334 3.608 1.31.975.975 1.248 2.242 1.31 3.608.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.062 1.366-.334 2.633-1.31 3.608-.975.975-2.242 1.248-3.608 1.31-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.366-.062-2.633-.334-3.608-1.31-.975-.975-1.248-2.242-1.31-3.608-.058-1.266-.07-1.646-.07-4.85s.012-3.584.07-4.85c.062-1.366.334-2.633 1.31-3.608.975-.975 2.242-1.248 3.608-1.31 1.266-.058 1.646-.07 4.85-.07zm0-2.163c-3.259 0-3.667.014-4.947.072-1.281.059-2.418.27-3.29 1.142-.872.872-1.083 2.009-1.142 3.29-.058 1.28-.072 1.688-.072 4.947s.014 3.667.072 4.947c.059 1.281.27 2.418 1.142 3.29.872.872 2.009 1.083 3.29 1.142 1.28.058 1.688.072 4.947.072s3.667-.014 4.947-.072c1.281-.059 2.418-.27 3.29-1.142.872-.872 1.083-2.009 1.142-3.29.058-1.28.072-1.688.072-4.947s-.014-3.667-.072-4.947c-.059-1.281-.27-2.418-1.142-3.29-.872-.872-2.009-1.083-3.29-1.142-1.28-.058-1.688-.072-4.947-.072zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162-2.759-6.162-6.162-6.162zm0 10.162c-2.207 0-4-1.793-4-4s1.793-4 4-4 4 1.793 4 4-1.793 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.441s.645 1.441 1.441 1.441 1.441-.645 1.441-1.441-.645-1.441-1.441-1.441z"/>
           </svg>
         </a>
+        <a href="https://x.com/AdityaBarokar" target="_blank" title="Twitter" rel="noopener">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0023.953 4.57z"/>
+          </svg>
+        </a>
       </div>
     </div>
   </footer>
   <div class="overlay" id="overlay" onclick="closeOverlay()">
-    <div class="overlay-content">
+    <div class="overlay-content" onclick="event.stopPropagation()">
+      <button class="close-btn-custom" onclick="closeOverlay()" aria-label="Close">&times;</button>
       <h2 id="overlay-title"></h2>
       <p id="overlay-desc"></p>
-      <a id="overlay-link" class="btn-visit" href="#" target="_blank">Visit</a>
+      <a id="overlay-link" class="btn-visit" href="#" target="_blank" style="display:none;">Visit</a>
     </div>
   </div>
   <script>
@@ -362,7 +775,17 @@
     function openOverlay(title, desc, link) {
       document.getElementById('overlay-title').textContent = title;
       document.getElementById('overlay-desc').innerHTML = desc;
-      document.getElementById('overlay-link').href = link;
+      const visitBtn = document.getElementById('overlay-link');
+      // Show Visit button only for Projects section
+      // List your project titles here (case-sensitive)
+      const projectTitles = ['Ethigotchi', 'ScrapeMEE'];
+      if (projectTitles.includes(title)) {
+        visitBtn.style.display = 'inline-block';
+        visitBtn.href = link;
+      } else {
+        visitBtn.style.display = 'none';
+        visitBtn.href = '#';
+      }
       document.getElementById('overlay').classList.add('active');
     }
 
@@ -370,13 +793,37 @@
       document.getElementById('overlay').classList.remove('active');
     }
 
+    // Theme toggle logic for single icon button
     document.getElementById('theme-toggle').addEventListener('click', function() {
       document.body.classList.toggle('dark-mode');
       const isDarkMode = document.body.classList.contains('dark-mode');
       this.textContent = isDarkMode ? '☀️' : '🌙';
-      // Save the theme preference to localStorage
       localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
     });
+
+    // On load, set theme from localStorage
+    document.addEventListener('DOMContentLoaded', function() {
+      let theme = localStorage.getItem('theme') || 'light';
+      if (theme === 'dark') {
+        document.body.classList.add('dark-mode');
+        document.getElementById('theme-toggle').textContent = '☀️';
+      } else {
+        document.body.classList.remove('dark-mode');
+        document.getElementById('theme-toggle').textContent = '🌙';
+      }
+      // ...existing code...
+    });
+
+    // TryHackMe Stats Overlay logic
+    document.getElementById('show-thm-btn').addEventListener('click', function() {
+      document.getElementById('thm-overlay').classList.add('active');
+      // Prevent background scroll when overlay is open
+      document.body.style.overflow = 'hidden';
+    });
+    function closeThmOverlay(e) {
+      document.getElementById('thm-overlay').classList.remove('active');
+      document.body.style.overflow = '';
+    }
 
     function startBinaryAnimation() {
       const canvas = document.getElementById('binaryCanvas');
