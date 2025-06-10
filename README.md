@@ -4,7 +4,7 @@ Welcome to my personal portfolio! This website showcases my skills, projects, an
 
 ## 🚀 Live Demo  
 You can view my portfolio here:  
-👉 **[https://Tengen-12.github.io/my-portfolio/Aditya.html](https://Tengen-12.github.io/my-portfolio/Aditya.html)**
+👉 *[https://Tengen-12.github.io/my-portfolio/Aditya.html](https://Tengen-12.github.io/my-portfolio/Aditya.html)*
 
 ---
 
